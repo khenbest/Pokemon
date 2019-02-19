@@ -5,6 +5,6 @@ export default class Pokemon {
     }
 
     showName() {
-        return `<button onclick="app.controller.pokemonController.selectPokemon()"> ${this.name}</button>`
+        return `<button onclick="app.controller.pokemonController.selectPokemon('${this.name}')"> ${this.name}</button>`
     }
 }

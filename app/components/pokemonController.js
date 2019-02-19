@@ -11,16 +11,33 @@ function drawApiPokemon() {
     })
     document.getElementById('pokedex').innerHTML = template
 }
-function selectPokemon() {
 
+function drawSelectedPokemon() {
+    let template = ''
+    let selected = _pokemonService.SelectedPokemon
+        (template += `<div class="card" style="width: 18rem;">
+        <img src="${selected.sprites.front_default}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">${selected.species.name}</h5>
+                <p class="card-text">${selected.abilities}</p>
+                <a onclick="addSelectedPokemon()" class="btn btn-primary">Add To Team</a>
+            </div>
+</div>`)
+    document.getElementById('selected').innerHTML = template
 }
-function addSelectedPokemon() {
+// function addSelectedPokemon() {
 
-}
+// }
 
 export default class PokemonController {
     constructor() {
         _pokemonService.addSubscriber('apiPokemon', drawApiPokemon)
+        _pokemonService.addSubscriber('selectedPokemon', drawSelectedPokemon)
+
         _pokemonService.grabPokemonData()
+        _pokemonService.selectPokemon()
+    }
+    selectPokemon(name) {
+        _pokemonService.selectPokemon(name)
     }
 }

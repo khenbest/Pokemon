@@ -10,7 +10,7 @@ let _sandbox = axios.create({
 
 let _state = {
     apiPokemon: [],
-    selectedPokemon: [],
+    selectedPokemon: {},
     myPokemon: []
 }
 
@@ -42,4 +42,16 @@ export default class PokemonService {
 
     }
 
+    get SelectedPokemon() {
+        return _state.selectedPokemon
+    }
+
+    selectPokemon(name) {
+        _pokemonAPI.get(name)
+            .then(res => {
+                let data = new Pokemon(res.data)
+                setState('selectedPokemon', data)
+            })
+
+    }
 }
