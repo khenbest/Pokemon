@@ -1,11 +1,12 @@
 import Pokemon from "../models/pokemon.js";
+import SelectedPokemon from "../models/selectedPokemon.js";
 
 let _pokemonAPI = axios.create({
     baseURL: 'https://pokeapi.co/api/v2/pokemon'
 })
 
 let _sandbox = axios.create({
-    baseURL: 'https://bcw-sandbox.herokuapp.com/api/Kenny/pokemon'
+    baseURL: 'https://bcw-sandbox.herokuapp.com/api/Kenny/heroes'
 })
 
 let _state = {
@@ -49,7 +50,7 @@ export default class PokemonService {
     selectPokemon(name) {
         _pokemonAPI.get(name)
             .then(res => {
-                let data = new Pokemon(res.data)
+                let data = new SelectedPokemon(res.data)
                 setState('selectedPokemon', data)
             })
 

@@ -15,14 +15,14 @@ function drawApiPokemon() {
 function drawSelectedPokemon() {
     let template = ''
     let selected = _pokemonService.SelectedPokemon
-        (template += `<div class="card" style="width: 18rem;">
-        <img src="${selected.sprites.front_default}" class="card-img-top">
+    template += `<div class="card" style="width: 18rem;">
+        <img src="${selected.img}" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">${selected.species.name}</h5>
-                <p class="card-text">${selected.abilities}</p>
-                <a onclick="addSelectedPokemon()" class="btn btn-primary">Add To Team</a>
-            </div>
-</div>`)
+                <h5 class="card-title">${selected.name}</h5>
+                <p class="card-text">${selected.types[0] + ' ' + selected.types[1]}</p >
+    <a onclick="addSelectedPokemon()" class="btn btn-primary">Add To Team</a>
+            </div >
+</div > `
     document.getElementById('selected').innerHTML = template
 }
 // function addSelectedPokemon() {
@@ -35,9 +35,11 @@ export default class PokemonController {
         _pokemonService.addSubscriber('selectedPokemon', drawSelectedPokemon)
 
         _pokemonService.grabPokemonData()
-        _pokemonService.selectPokemon()
+
     }
     selectPokemon(name) {
         _pokemonService.selectPokemon(name)
     }
+
+
 }
