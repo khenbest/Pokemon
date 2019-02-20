@@ -19,7 +19,11 @@ function drawSelectedPokemon() {
         <img src="${selected.img}" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">${selected.name}</h5>
-                <p class="card-text">${selected.types[0] + ' ' + selected.types[1]}</p >
+                <p class="card-text">`
+    for (let i = 0; i < selected.types.length; i++) {
+        template += selected.types[i] + " "
+    }
+    template += `</p >
     <a onclick="addSelectedPokemon()" class="btn btn-primary">Add To Team</a>
             </div >
 </div > `
