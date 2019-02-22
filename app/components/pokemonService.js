@@ -65,7 +65,14 @@ export default class PokemonService {
     }
 
     addSelectedPokemon() {
-        _sandbox.post('', _state.selectedPokemon)
+        _sandbox.post('', _state.myPokemon)
+            .then(res => {
+                console.log(res)
+                this.grabMyTeam()
+            })
+    }
+    deleteSelectedPokemon() {
+        _sandbox.delete('', _state.myPokemon)
             .then(res => {
                 console.log(res)
                 this.grabMyTeam()

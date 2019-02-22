@@ -41,6 +41,8 @@ function drawMyTeam() {
         template += selected.types[i] + " "
     }
     template += `</p >
+    <a onclick="app.controllers.pokemonController.deleteSelectedPokemon()" class="btn btn-danger">Remove From Team</a>
+            </div >
             </div >
 </div > `
     document.getElementById('my-team').innerHTML = template
@@ -60,6 +62,9 @@ export default class PokemonController {
     }
     addSelectedPokemon() {
         _pokemonService.addSelectedPokemon()
+    }
+    deleteSelectedPokemon() {
+        _pokemonService.deleteSelectedPokemon()
     }
     grabMyTeam() {
         _pokemonService.grabMyTeam()
