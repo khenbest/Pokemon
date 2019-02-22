@@ -6,7 +6,7 @@ let _pokemonAPI = axios.create({
 })
 
 let _sandbox = axios.create({
-    baseURL: 'https://bcw-sandbox.herokuapp.com/api/Kenny/heroes'
+    baseURL: 'https://bcw-sandbox.herokuapp.com/api/Kenny/pokemon'
 })
 
 let _state = {
@@ -54,5 +54,21 @@ export default class PokemonService {
                 setState('selectedPokemon', data)
             })
 
+    }
+
+    grabMyTeam() {
+        _sandbox.get('')
+            .then(res => {
+                let data = res.data.data.map(p => new SelectedPokemon(p))
+                setState('myPokemon', data)
+            })
+    }
+
+    addSelectedPokemon() {
+        _sandbox.post('', _state.selectedPokemon)
+            .then(res => {
+                console.log(res)
+                this.grabMyTeam()
+            })
     }
 }

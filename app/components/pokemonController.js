@@ -24,26 +24,44 @@ function drawSelectedPokemon() {
         template += selected.types[i] + " "
     }
     template += `</p >
-    <a onclick="addSelectedPokemon()" class="btn btn-primary">Add To Team</a>
+    <a onclick="app.controllers.pokemonController.addSelectedPokemon()" class="btn btn-primary">Add To Team</a>
             </div >
 </div > `
     document.getElementById('selected').innerHTML = template
 }
-// function addSelectedPokemon() {
-
-// }
+function drawMyTeam() {
+    let template = ''
+    let selected = _pokemonService.SelectedPokemon
+    template += `<div class="card" style="width: 18rem;">
+        <img src="${selected.img}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">${selected.name}</h5>
+                <p class="card-text">`
+    for (let i = 0; i < selected.types.length; i++) {
+        template += selected.types[i] + " "
+    }
+    template += `</p >
+            </div >
+</div > `
+    document.getElementById('my-team').innerHTML = template
+}
 
 export default class PokemonController {
     constructor() {
         _pokemonService.addSubscriber('apiPokemon', drawApiPokemon)
         _pokemonService.addSubscriber('selectedPokemon', drawSelectedPokemon)
-
+        _pokemonService.addSubscriber('myPokemon', drawMyTeam)
         _pokemonService.grabPokemonData()
 
     }
     selectPokemon(name) {
         _pokemonService.selectPokemon(name)
+
     }
-
-
+    addSelectedPokemon() {
+        _pokemonService.addSelectedPokemon()
+    }
+    grabMyTeam() {
+        _pokemonService.grabMyTeam()
+    }
 }
